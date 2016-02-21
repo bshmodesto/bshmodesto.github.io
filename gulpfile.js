@@ -204,7 +204,7 @@ gulp.task('build', ['jade', 'html', 'buildBundle', 'images', 'fonts', 'extras'],
 
 gulp.task('deploy', ['build'], function () {
   return gulp.src("dist/**/*")
-    .pipe(ghPages({"branch":"master"}))
+    .pipe(ghPages())
 });
 
 // Default task
