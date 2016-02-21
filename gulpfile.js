@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var del = require('del');
+var ghPages = require('gulp-gh-pages');
 
 
 var path = require('path');
@@ -199,6 +200,11 @@ gulp.task('build', ['jade', 'html', 'buildBundle', 'images', 'fonts', 'extras'],
         .pipe($.uglify())
         .pipe($.stripDebug())
         .pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('deploy', ['build'], function () {
+  return gulp.src("dist/**/*")
+    .pipe(ghPages({"branch":"master"}))
 });
 
 // Default task
