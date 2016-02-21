@@ -4,9 +4,8 @@ var gulp = require('gulp');
 var del = require('del');
 var ghPages = require('gulp-gh-pages');
 
-
 var path = require('path');
-
+var debug = require('gulp-debug');
 
 // Load plugins
 var $ = require('gulp-load-plugins')();
@@ -99,6 +98,7 @@ gulp.task('images', function() {
             progressive: true,
             interlaced: true
         })))
+        .pipe(debug())
         .pipe(gulp.dest('dist/images'))
         .pipe($.size());
 });
@@ -206,7 +206,7 @@ gulp.task('build', ['jade', 'html', 'buildBundle', 'images', 'fonts', 'extras'],
 });
 
 gulp.task('deploy', ['build'], function () {
-  return gulp.src("dist/**/*")
+  return gulp.src("./dist/**/*")
     .pipe(ghPages({"branch":"master"}));
 });
 
